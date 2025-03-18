@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "PlayingState.h"
 
 PlayingState::PlayingState(StateMachine* stateMachine, SnakeGraphics* snakeGraphics) : BaseState(stateMachine, snakeGraphics) {}

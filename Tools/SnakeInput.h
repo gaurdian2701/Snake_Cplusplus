@@ -1,7 +1,4 @@
 #pragma once
-#include <functional>
-#include <vector>
-#include <map>
 #include "Windows.h"
 
 class SnakeGraphics;

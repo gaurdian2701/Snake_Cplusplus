@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "OutroState.h"
 
 OutroState::OutroState(StateMachine* stateMachine, SnakeGraphics* snakeGraphics) : BaseState(stateMachine, snakeGraphics) {}

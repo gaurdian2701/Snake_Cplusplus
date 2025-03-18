@@ -1,5 +1,11 @@
 #pragma once
 #include <iostream>
+#include <chrono>
+#include <thread>
+#include <functional>
+#include <vector>
+#include <map>
+#include <string>
 
 class SnakeGraphics;
 class SnakeGameStateMachine;

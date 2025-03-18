@@ -1,7 +1,5 @@
+#include "../stdafx.h"
 #include <windows.h>
-#include <iostream>
-#include <vector>
-#include <string>
 #include "SnakeGraphics.h"
 
 HBRUSH SnakeGraphics::GetBrushWithColor(const Color InColor)

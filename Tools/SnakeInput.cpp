@@ -1,6 +1,6 @@
+#include "../stdafx.h"
 #include "SnakeInput.h"
 #include "SnakeGraphics.h"
-#include <iostream>
 
 SnakeInput* SnakeInput::Instance = nullptr;
 

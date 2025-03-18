@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "Game.h"
-#include <functional>
 #include "Tools/SnakeInput.h"
 #include "Tools/SnakeGraphics.h"
 #include "SnakeGameStateMachine.h"
-#include <chrono>
-#include <thread>
+
 
 bool Game::Init()
 {
@@ -23,30 +21,31 @@ bool Game::Init()
 		return false;
 	}
 	SnakeInput::AddKeyDownCallback(std::bind(&Game::KeyDownCallBack, this, std::placeholders::_1));
-
-	m_stateMachine = new SnakeGameStateMachine(m_snakeGraphics);
+	world = new World(m_snakeGraphics);
+	world->Init();
 	return true;
 }
 
 void Game::Update()
 {
-	m_stateMachine->StateMachine_Update();
+	world->Update();
 }
 
 void Game::Render()
 {
-	m_stateMachine->StateMachine_Render();
+	world->Render();
 }
 
 void Game::KeyDownCallBack(const int key) const
 {
-	m_stateMachine->StateMachine_KeyDownCallBack(key);
+	world->KeyDown(key);
 }
 
 void Game::Cleanup()
 {
 	SnakeInput::CleanUp();
-	delete m_stateMachine;
+	world->Cleanup();
+	delete world;
 	delete m_snakeGraphics;
 }
 

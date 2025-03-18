@@ -1,4 +1,0 @@
-static enum StateEnums
-{
-
-};

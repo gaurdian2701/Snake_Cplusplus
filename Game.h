@@ -1,5 +1,5 @@
 #pragma once
-#include "stdafx.h"
+#include "World.h"
 class Game
 {
 private:
@@ -7,7 +7,8 @@ private:
 	float m_deltaTime = 0.0f;
 
 	SnakeGraphics* m_snakeGraphics = nullptr;
-	SnakeGameStateMachine* m_stateMachine = nullptr;
+	World* world = nullptr;
+	
 
 
 	bool Init();

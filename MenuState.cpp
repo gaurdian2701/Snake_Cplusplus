@@ -1,5 +1,6 @@
-#include "MenuState.h"
 #include "stdafx.h"
+
+#include "MenuState.h"
 #define ENTER_KEY 13
 
 MenuState::MenuState(StateMachine* stateMachine, SnakeGraphics* snakeGraphics) : BaseState(stateMachine, snakeGraphics) {}
