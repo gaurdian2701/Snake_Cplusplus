@@ -69,7 +69,6 @@ void World::Run()
 		}
 
 		m_deltaTime = std::chrono::duration<float>(std::chrono::system_clock::now() - timeAtStartOfFrame).count();
-		std::cout << "deltaTime: " << m_deltaTime << std::endl;
 		timeAtStartOfFrame = std::chrono::system_clock::now();
 	}
 	CloseWindow();

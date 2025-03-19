@@ -20,6 +20,8 @@ void Snake::Update()
 	Vector2 oldPositionOfPredecessorSegment = m_headSegment->position;
 	Vector2 tempPos;
 
+	std::cout << "Pos: " << m_headSegment->position.x << " " << m_headSegment->position.y << std::endl;
+
 	m_headSegment->position = m_headSegment->position + m_movementVector * m_speedModifier * m_world->DeltaTime();
 
 	for (int i = 1; i < m_snakeSize; i++)
@@ -54,21 +56,33 @@ void Snake::ReadInput()
 	switch (GetKeyPressed())
 	{
 	case KEY_RIGHT:
+		if (m_currentMovementDirection == LEFT)
+			return;
+
 		m_currentMovementDirection = RIGHT;
 		m_movementVector = { 1,0 };
 		break;
 
 	case KEY_LEFT:
+		if (m_currentMovementDirection == RIGHT)
+			return;
+
 		m_currentMovementDirection = LEFT;
 		m_movementVector = { -1, 0 };
 		break;
 
 	case KEY_UP:
+		if (m_currentMovementDirection == DOWN)
+			return;
+
 		m_currentMovementDirection = UP;
 		m_movementVector = { 0, -1 };
 		break;
 
 	case KEY_DOWN:
+		if (m_currentMovementDirection == UP)
+			return;
+
 		m_currentMovementDirection = DOWN;
 		m_movementVector = { 0, 1 };
 		break;
