@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Apple.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="World.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="GameObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Apple.cpp" />
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="PlayingState.cpp" />
