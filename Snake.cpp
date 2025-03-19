@@ -9,7 +9,7 @@ Snake::Snake(World *world)
 	m_snakeSegments.push_back(Segment({ SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2 }));
 	m_headSegment = &m_snakeSegments[0];
 	m_movementVector = { 1, 0 };
-	m_currentMovementDirection = RIGHT;
+	m_currentMovementDirection = MovementDirection::RIGHT;
 	world->AddGameObject(this);
 }
 
@@ -56,34 +56,34 @@ void Snake::ReadInput()
 	switch (GetKeyPressed())
 	{
 	case KEY_RIGHT:
-		if (m_currentMovementDirection == LEFT)
+		if (m_currentMovementDirection == MovementDirection::LEFT)
 			return;
-
-		m_currentMovementDirection = RIGHT;
+		
+		m_currentMovementDirection = MovementDirection::RIGHT;
 		m_movementVector = { 1,0 };
 		break;
 
 	case KEY_LEFT:
-		if (m_currentMovementDirection == RIGHT)
+		if (m_currentMovementDirection == MovementDirection::RIGHT)
 			return;
 
-		m_currentMovementDirection = LEFT;
+		m_currentMovementDirection = MovementDirection::LEFT;
 		m_movementVector = { -1, 0 };
 		break;
 
 	case KEY_UP:
-		if (m_currentMovementDirection == DOWN)
+		if (m_currentMovementDirection == MovementDirection::DOWN)
 			return;
 
-		m_currentMovementDirection = UP;
+		m_currentMovementDirection = MovementDirection::UP;
 		m_movementVector = { 0, -1 };
 		break;
 
 	case KEY_DOWN:
-		if (m_currentMovementDirection == UP)
+		if (m_currentMovementDirection == MovementDirection::UP)
 			return;
 
-		m_currentMovementDirection = DOWN;
+		m_currentMovementDirection = MovementDirection::DOWN;
 		m_movementVector = { 0, 1 };
 		break;
 

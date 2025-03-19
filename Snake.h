@@ -15,7 +15,7 @@ private:
 		}
 	};
 
-	enum MovementDirection
+	enum class MovementDirection
 	{
 		RIGHT,
 		LEFT,
