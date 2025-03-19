@@ -1,11 +1,15 @@
 #pragma once
-#include "GameObject.h"
-class Apple : GameObject
+#include "Snake.h"
+class Apple : public GameObject
 {
 public:
-	Apple(World* world);
+	Apple(World* world, GameObject *snake);
 	void Update() override;
 	void Render() override;
 	void Destroy() override;
+
+private:
+	Snake* m_snake = nullptr;
+	void RandomizePosition();
 };
 

@@ -14,6 +14,7 @@ void PlayingState::Init()
 void PlayingState::CreateGameObjects()
 {
 	m_snake = new Snake(m_world);
+	m_apple = new Apple(m_world, m_snake);
 }
 
 void PlayingState::Update() 

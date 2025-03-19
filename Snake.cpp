@@ -6,7 +6,7 @@ Snake::Snake(World *world)
 {
 	m_world = world;
 	m_snakeSegments.reserve(100);
-	m_snakeSegments.push_back(Segment({ SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2 }));
+	m_snakeSegments.push_back(Segment({ HORIZONTAL_RESOLUTION/ 2, VERTICAL_RESOLUTION / 2 }));
 	m_headSegment = &m_snakeSegments[0];
 	m_movementVector = { 1, 0 };
 	m_currentMovementDirection = MovementDirection::RIGHT;
@@ -17,10 +17,8 @@ void Snake::Update()
 {
 	ReadInput();
 
-	Vector2 oldPositionOfPredecessorSegment = m_headSegment->position;
-	Vector2 tempPos;
-
-	std::cout << "Pos: " << m_headSegment->position.x << " " << m_headSegment->position.y << std::endl;
+	Vector2D oldPositionOfPredecessorSegment = m_headSegment->position;
+	Vector2D tempPos;
 
 	m_headSegment->position = m_headSegment->position + m_movementVector * m_speedModifier * m_world->DeltaTime();
 
@@ -32,9 +30,14 @@ void Snake::Update()
 	}
 }
 
+Vector2D Snake::GetPosition()
+{
+	return m_headSegment->position;
+}
+
 void Snake::GrowSnake()
 {
-	m_snakeSegments.push_back(Segment(Vector2(m_headSegment->position.x - SNAKE_DIMENSIONS, 
+	m_snakeSegments.push_back(Segment(Vector2D(m_headSegment->position.x - SNAKE_DIMENSIONS, 
 		m_headSegment->position.y - SNAKE_DIMENSIONS)));
 	m_snakeSize++;
 }
@@ -49,6 +52,8 @@ void Snake::Render()
 void Snake::Destroy()
 {
 	m_snakeSegments.clear();
+	m_world = nullptr;
+	m_isDestroyed = true;
 }
 
 void Snake::ReadInput()

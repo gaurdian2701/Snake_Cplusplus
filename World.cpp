@@ -4,7 +4,7 @@
 
 bool World::Init()
 {
-	InitWindow(1024, 720, "WHAT A THRILLLLLLLLL");
+	InitWindow(HORIZONTAL_RESOLUTION, VERTICAL_RESOLUTION, "WHAT A THRIIIIIIIIIIIIIILLLLLLLL");
 	m_stateMachine = new SnakeGameStateMachine(this);
 	return true;
 }
