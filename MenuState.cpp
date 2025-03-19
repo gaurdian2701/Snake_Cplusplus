@@ -1,9 +1,10 @@
 #include "stdafx.h"
-
 #include "MenuState.h"
-#define ENTER_KEY 13
 
-MenuState::MenuState(StateMachine* stateMachine, SnakeGraphics* snakeGraphics) : BaseState(stateMachine, snakeGraphics) {}
+#define HORIZONTAL_PIXEL_COUNT 1024
+#define VERTICAL_PIXEL_COUNT 720
+
+MenuState::MenuState(StateMachine* stateMachine, World *world) : BaseState(stateMachine, world) {}
 
 void MenuState::Init() 
 {
@@ -12,21 +13,20 @@ void MenuState::Init()
 
 void MenuState::Update() 
 {
+	ReadInput();
 }
 void MenuState::Render() 
 {
-	m_snakeGraphics->PlotText(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0, Color(0, 0, 0), L"Start Game", Color(0, 255, 0), 
-		SnakeGraphics::Alignment::Center);
-	m_snakeGraphics->Render();
+	const char* startString = "PRESS ENTER TO START";
+	DrawText(startString, HORIZONTAL_PIXEL_COUNT/2 - strlen(startString), VERTICAL_PIXEL_COUNT / 2, 20, GREEN);
 }
 void MenuState::Cleanup() 
 {
-	m_snakeGraphics->ClearScreen();
+
 }
 
-void MenuState::KeyDown(const int key)const 
+void MenuState::ReadInput() 
 {
-	std::cout << "Key Pressed " << key << std::endl;
-	if (key == ENTER_KEY)
+	if (IsKeyPressed(KEY_ENTER))
 		m_stateMachine->SwitchState(PLAYING_STATE);
 }

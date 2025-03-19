@@ -2,11 +2,10 @@
 #include "SnakeGameStateMachine.h"
 
 
-SnakeGameStateMachine::SnakeGameStateMachine(SnakeGraphics *snakeGraphics)
+SnakeGameStateMachine::SnakeGameStateMachine(World *world)
 {
 	std::cout << "Snake Game State Machine ctor" << std::endl;
-	m_snakeGraphics = snakeGraphics;
-	InitStates();
+	InitStates(world);
 	m_currentState = m_menuState;
 	m_currentState->Init();
 }
@@ -19,11 +18,11 @@ SnakeGameStateMachine::~SnakeGameStateMachine()
 	delete m_outroState;
 }
 
-void SnakeGameStateMachine::InitStates()
+void SnakeGameStateMachine::InitStates(World *world)
 {
-	m_menuState = new MenuState(this, m_snakeGraphics);
-	m_playingState = new PlayingState(this, m_snakeGraphics);
-	m_outroState = new OutroState(this, m_snakeGraphics);
+	m_menuState = new MenuState(this, world);
+	m_playingState = new PlayingState(this, world);
+	m_outroState = new OutroState(this, world);
 }
 
 void SnakeGameStateMachine::SwitchState(const Enum_GameStates gameState)
@@ -62,9 +61,4 @@ void SnakeGameStateMachine::StateMachine_Update()
 void SnakeGameStateMachine::StateMachine_Render()
 {
 	m_currentState->Render();
-}
-
-void SnakeGameStateMachine::StateMachine_KeyDownCallBack(const int key) const
-{
-	m_currentState->KeyDown(key);
 }

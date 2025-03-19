@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "Game.h"
+#include "World.h"
 
 int main()
 {
-	Game game;
-	game.Run();
+	World world;
+	world.Run();
 	return 0;
 }

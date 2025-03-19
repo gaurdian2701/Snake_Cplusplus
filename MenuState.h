@@ -4,13 +4,13 @@ class MenuState : public BaseState
 {
 
 public:
-	MenuState(StateMachine *stateMachine, SnakeGraphics* snakeGraphics);
+	MenuState(StateMachine *stateMachine, World *world);
 
 private:
 	void Init() override;
 	void Update() override;
 	void Render() override;
 	void Cleanup() override;
-	void KeyDown(const int key) const override;
+	void ReadInput() override;
 };
 

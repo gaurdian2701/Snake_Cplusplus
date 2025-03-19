@@ -6,8 +6,8 @@
 #include <vector>
 #include <map>
 #include <string>
+#include "raylib.h"
 
-class SnakeGraphics;
 class SnakeGameStateMachine;
 
 enum Enum_GameStates

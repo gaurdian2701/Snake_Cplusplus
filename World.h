@@ -1,21 +1,23 @@
 #pragma once
-#include "SnakeGameStateMachine.h"
-#include "GameObject.h"
-
+class GameObject;
+class StateMachine;
 class World
 {
-public:
-	World(SnakeGraphics *snakeGraphics);
-	~World();
-	void Init();
+private:
+	const int FPS = 25;
+	float m_deltaTime = 0.0f;
+	StateMachine* m_stateMachine;
+	std::vector<GameObject*> m_gameObjects;
+
+	bool Init();
 	void Update();
 	void Render();
 	void Cleanup();
-	void KeyDown(const int key)const;
 
-private:
-	StateMachine* m_stateMachine;
-	SnakeGraphics* m_snakeGraphics;
-	std::vector<GameObject*> m_gameObjects;
+public:
+	void Run();
+	void AddGameObject(GameObject* gameobject);
+	const std::vector<GameObject*>& GetGameObjects() const;
+	const float DeltaTime() const;
 };
 

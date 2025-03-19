@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "BaseState.h"
 
-BaseState::BaseState(StateMachine* stateMachine, SnakeGraphics* snakeGraphics)
+BaseState::BaseState(StateMachine* stateMachine, World *world)
 {
 	m_stateMachine = stateMachine;
-	m_snakeGraphics = snakeGraphics;
 }
 
 BaseState::~BaseState()
@@ -14,4 +13,4 @@ BaseState::~BaseState()
 
 void BaseState::Update() {}
 void BaseState::Render() {}
-void BaseState::KeyDown(const int key) const {}
+void BaseState::ReadInput() {}

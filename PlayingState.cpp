@@ -1,31 +1,33 @@
 #include "stdafx.h"
 #include "PlayingState.h"
 
-PlayingState::PlayingState(StateMachine* stateMachine, SnakeGraphics* snakeGraphics) : BaseState(stateMachine, snakeGraphics) {}
+PlayingState::PlayingState(StateMachine* stateMachine, World *world) : BaseState(stateMachine, world), m_world(world)
+{
+}
 
 void PlayingState::Init() 
 {
-	std::cout << "Playing State Init" << std::endl;
+	CreateGameObjects();
+	m_gameObjects = &(m_world->GetGameObjects());
 }
-void PlayingState::Update() {}
+
+void PlayingState::CreateGameObjects()
+{
+	m_snake = new Snake(m_world);
+}
+
+void PlayingState::Update() 
+{
+	for (GameObject* gameObject : *m_gameObjects)
+		gameObject->Update();
+}
+
 void PlayingState::Render() 
 {
-	for (int x = 0; x < SCREEN_WIDTH; x++)
-	{
-		m_snakeGraphics->PlotTile(x, 0, 0, Color(0, 255, 0), Color(0, 0, 0), 'S');
-		m_snakeGraphics->PlotTile(x, SCREEN_HEIGHT - 1, 0, Color(0, 255, 0), Color(0, 0, 0), 'S');
-	}
-
-	for (int y = 0; y < SCREEN_HEIGHT; y++)
-	{
-		m_snakeGraphics->PlotTile(0, y, 0, Color(0, 255, 0), Color(0, 0, 0), 'S');
-		m_snakeGraphics->PlotTile(SCREEN_WIDTH - 1, y, 0, Color(0, 255, 0), Color(0, 0, 0), 'S');
-	}
-
-	m_snakeGraphics->Render();
+	for (GameObject* gameObject : *m_gameObjects)
+		gameObject->Render();
 }
 void PlayingState::Cleanup() 
 {
-	m_snakeGraphics->ClearScreen();
 }
-void PlayingState::KeyDown(const int key)const {}
+void PlayingState::ReadInput() {}

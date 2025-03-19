@@ -1,10 +1,12 @@
 #pragma once
+
+#include "World.h"
 class GameObject
 {
 public:
-	virtual void Update() = 0;
-	virtual void Render() = 0;
-	virtual void Destroy() = 0;
+	virtual void Update() {}
+	virtual void Render() {}
+	virtual void Destroy() {}
 	bool IsDestroyed() { return m_isDestroyed; }
 
 protected:
