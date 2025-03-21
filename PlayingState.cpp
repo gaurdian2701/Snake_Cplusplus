@@ -13,22 +13,34 @@ void PlayingState::Init()
 
 void PlayingState::CreateGameObjects()
 {
-	m_snake = new Snake(m_world);
+	m_snake = new Snake(m_stateMachine, m_world, new PlayerAgent(0));
 	m_apple = new Apple(m_world, m_snake);
 }
 
 void PlayingState::Update() 
 {
 	for (GameObject* gameObject : *m_gameObjects)
-		gameObject->Update();
+	{
+		if (!gameObject->IsDestroyed())
+			gameObject->Update();
+	}
 }
 
 void PlayingState::Render() 
 {
 	for (GameObject* gameObject : *m_gameObjects)
-		gameObject->Render();
+	{
+		if(!gameObject->IsDestroyed())
+			gameObject->Render();
+	}
 }
+
 void PlayingState::Cleanup() 
 {
+	m_world->DestroyGameObject(m_snake);
+	m_world->DestroyGameObject(m_apple);
+	delete(m_snake);
+	delete(m_apple);
 }
+
 void PlayingState::ReadInput() {}

@@ -4,6 +4,7 @@
 #include <thread>
 #include <functional>
 #include <vector>
+#include <queue>
 #include <map>
 #include <string>
 #include "raylib.h"
@@ -27,11 +28,16 @@ struct Vector2D
 		return Vector2D(x * other, y * other);
 	}
 
-	float DistanceFrom(Vector2D other)
+	double DistanceFrom(Vector2D other)
 	{
-		float diffX = x - other.x;
-		float diffY = y - other.y;
+		double diffX = x - other.x;
+		double diffY = y - other.y;
 		return sqrt((diffX * diffX) + (diffY * diffY));
+	}
+
+	bool operator==(Vector2D other)
+	{
+		return x == other.x && y == other.y;
 	}
 };
 
@@ -40,6 +46,14 @@ enum Enum_GameStates
 	MENU_STATE,
 	PLAYING_STATE,
 	OUTRO_STATE
+};
+
+enum class MovementDirection
+{
+	LEFT,
+	UP,
+	RIGHT,
+	DOWN
 };
 
 constexpr int HORIZONTAL_RESOLUTION = 1024;

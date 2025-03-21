@@ -1,5 +1,6 @@
 #pragma once
 #include "World.h"
+#include "StateMachine.h"
 class GameObject
 {
 public:

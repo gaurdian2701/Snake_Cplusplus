@@ -12,8 +12,6 @@ Apple::Apple(World* world, GameObject* snake)
 
 void Apple::Update()
 {
-	std::cout << m_position.DistanceFrom(m_snake->GetPosition()) << std::endl;
-
 	if (m_position.DistanceFrom(m_snake->GetPosition()) < 20)
 	{
 		RandomizePosition();

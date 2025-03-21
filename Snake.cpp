@@ -2,14 +2,15 @@
 #include "Snake.h"
 #define SNAKE_DIMENSIONS 20
 
-Snake::Snake(World *world)
+Snake::Snake(StateMachine* stateMachine, World *world, BaseAgent* playerAgent)
 {
 	m_world = world;
+	m_stateMachine = stateMachine;
+	m_playerAgent = playerAgent;
 	m_snakeSegments.reserve(100);
 	m_snakeSegments.push_back(Segment({ HORIZONTAL_RESOLUTION/ 2, VERTICAL_RESOLUTION / 2 }));
 	m_headSegment = &m_snakeSegments[0];
 	m_movementVector = { 1, 0 };
-	m_currentMovementDirection = MovementDirection::RIGHT;
 	world->AddGameObject(this);
 }
 
@@ -22,12 +23,16 @@ void Snake::Update()
 
 	m_headSegment->position = m_headSegment->position + m_movementVector * m_speedModifier * m_world->DeltaTime();
 
+	CheckForScreenWrapping();
+
 	for (int i = 1; i < m_snakeSize; i++)
 	{
 		tempPos = m_snakeSegments[i].position;
 		m_snakeSegments[i].position = oldPositionOfPredecessorSegment;
 		oldPositionOfPredecessorSegment = tempPos;
 	}
+
+	CheckIfHeadBitBody();
 }
 
 Vector2D Snake::GetPosition()
@@ -35,10 +40,31 @@ Vector2D Snake::GetPosition()
 	return m_headSegment->position;
 }
 
+void Snake::CheckForScreenWrapping()
+{
+	if (m_headSegment->position.x > HORIZONTAL_RESOLUTION)
+		m_headSegment->position.x = 0;
+	else if (m_headSegment->position.x < 0)
+		m_headSegment->position.x = HORIZONTAL_RESOLUTION;
+	else if (m_headSegment->position.y > VERTICAL_RESOLUTION)
+		m_headSegment->position.y = 0;
+	else if (m_headSegment->position.y < 0)
+		m_headSegment->position.y = VERTICAL_RESOLUTION;
+}
+
+void Snake::CheckIfHeadBitBody()
+{
+	for (int i = 1; i < m_snakeSize; i++)
+	{
+		std::cout << m_snakeSegments[i].position.DistanceFrom(m_headSegment->position) << std::endl;
+		if (m_snakeSegments[i].position == m_headSegment->position)
+			m_stateMachine->SwitchState(OUTRO_STATE);
+	}
+}
+
 void Snake::GrowSnake()
 {
-	m_snakeSegments.push_back(Segment(Vector2D(m_headSegment->position.x - SNAKE_DIMENSIONS, 
-		m_headSegment->position.y - SNAKE_DIMENSIONS)));
+	m_snakeSegments.push_back(Segment(Vector2D(HORIZONTAL_RESOLUTION+1, VERTICAL_RESOLUTION+1)));
 	m_snakeSize++;
 }
 
@@ -58,41 +84,6 @@ void Snake::Destroy()
 
 void Snake::ReadInput()
 {
-	switch (GetKeyPressed())
-	{
-	case KEY_RIGHT:
-		if (m_currentMovementDirection == MovementDirection::LEFT)
-			return;
-		
-		m_currentMovementDirection = MovementDirection::RIGHT;
-		m_movementVector = { 1,0 };
-		break;
-
-	case KEY_LEFT:
-		if (m_currentMovementDirection == MovementDirection::RIGHT)
-			return;
-
-		m_currentMovementDirection = MovementDirection::LEFT;
-		m_movementVector = { -1, 0 };
-		break;
-
-	case KEY_UP:
-		if (m_currentMovementDirection == MovementDirection::DOWN)
-			return;
-
-		m_currentMovementDirection = MovementDirection::UP;
-		m_movementVector = { 0, -1 };
-		break;
-
-	case KEY_DOWN:
-		if (m_currentMovementDirection == MovementDirection::UP)
-			return;
-
-		m_currentMovementDirection = MovementDirection::DOWN;
-		m_movementVector = { 0, 1 };
-		break;
-
-	default:
-		break;
-	}
+	m_playerAgent->KeyDown(GetKeyPressed());
+	m_movementVector = m_playerAgent->GetNextDirection();
 }

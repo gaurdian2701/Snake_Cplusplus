@@ -29,6 +29,14 @@ void World::AddGameObject(GameObject* gameObject)
 	m_gameObjects.push_back(gameObject);
 }
 
+void World::DestroyGameObject(GameObject* gameObject)
+{
+	gameObject->Destroy();
+	for (int i = 0; i < m_gameObjects.size(); i++)
+		if (m_gameObjects[i] == gameObject)
+			m_gameObjects.erase(m_gameObjects.begin() + i);
+}
+
 const std::vector<GameObject*>& World::GetGameObjects() const
 {
 	return m_gameObjects;
