@@ -10,6 +10,7 @@
 #include "raylib.h"
 
 class SnakeGameStateMachine;
+class GameObject;
 
 struct Vector2D
 {
@@ -39,6 +40,12 @@ struct Vector2D
 	{
 		return x == other.x && y == other.y;
 	}
+};
+
+struct CollisionStruct
+{
+	int frameID;
+	GameObject* gameObject;
 };
 
 enum Enum_GameStates

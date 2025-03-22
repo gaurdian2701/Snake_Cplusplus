@@ -4,6 +4,7 @@
 
 Apple::Apple(World* world, GameObject* snake)
 {
+	m_name = "Apple";
 	m_world = world;
 	m_snake = dynamic_cast<Snake*>(snake);
 	RandomizePosition();
@@ -16,7 +17,13 @@ void Apple::Update()
 	{
 		RandomizePosition();
 		m_snake->GrowSnake();
+		m_world->UpdateScore();
 	}
+}
+
+void Apple::OnCollision(GameObject* other)
+{
+	std::cout << "Apple collision!" << std::endl;
 }
 
 void Apple::RandomizePosition()

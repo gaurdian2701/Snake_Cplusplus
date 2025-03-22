@@ -4,6 +4,7 @@
 BaseState::BaseState(StateMachine* stateMachine, World *world)
 {
 	m_stateMachine = stateMachine;
+	m_world = world;
 }
 
 BaseState::~BaseState()

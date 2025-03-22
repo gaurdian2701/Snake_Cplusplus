@@ -9,6 +9,7 @@ public:
 	
 protected:
 	StateMachine *m_stateMachine;
+	World* m_world;
 
 public:
 	virtual void Init() = 0;					

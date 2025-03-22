@@ -11,5 +11,6 @@ public:
 private:
 	Snake* m_snake = nullptr;
 	void RandomizePosition();
+	void OnCollision(GameObject* other) override;
 };
 

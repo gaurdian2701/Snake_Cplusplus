@@ -7,8 +7,10 @@ public:
 	virtual void Update() {}
 	virtual void Render() {}
 	virtual void Destroy() {}
-	virtual Vector2D GetPosition() { return Vector2D(0, 0); }
+	virtual Vector2D GetPosition() { return m_position; }
+	virtual void OnCollision(GameObject* other) {}
 	bool IsDestroyed() { return m_isDestroyed; }
+	std::string m_name;
 
 protected:
 	bool m_isDestroyed = false;

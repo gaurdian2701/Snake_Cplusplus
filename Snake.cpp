@@ -4,6 +4,7 @@
 
 Snake::Snake(StateMachine* stateMachine, World *world, BaseAgent* playerAgent)
 {
+	m_name = "Snake";
 	m_world = world;
 	m_stateMachine = stateMachine;
 	m_playerAgent = playerAgent;
@@ -56,7 +57,6 @@ void Snake::CheckIfHeadBitBody()
 {
 	for (int i = 1; i < m_snakeSize; i++)
 	{
-		std::cout << m_snakeSegments[i].position.DistanceFrom(m_headSegment->position) << std::endl;
 		if (m_snakeSegments[i].position == m_headSegment->position)
 			m_stateMachine->SwitchState(OUTRO_STATE);
 	}
@@ -73,6 +73,11 @@ void Snake::Render()
 	for(int i = 0; i < m_snakeSize; i++)
 		DrawRectangle(m_snakeSegments[i].position.x, m_snakeSegments[i].position.y, 
 			SNAKE_DIMENSIONS, SNAKE_DIMENSIONS, GREEN);
+}
+
+void Snake::OnCollision(GameObject* other)
+{
+	std::cout << "Snake Collision! " << std::endl;
 }
 
 void Snake::Destroy()

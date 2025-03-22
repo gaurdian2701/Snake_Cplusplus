@@ -9,6 +9,7 @@ public:
 private:
 	void Init() override;
 	void CreateGameObjects();
+	void LoadWalls();
 	void Update() override;
 	void Render() override;
 	void Cleanup() override;
@@ -17,5 +18,6 @@ private:
 	GameObject* m_apple = nullptr;
 	World* m_world = nullptr;
 	const std::vector<GameObject*>* m_gameObjects = nullptr;
+	std::vector<Vector2D> m_walls;
 };
 

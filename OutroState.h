@@ -11,5 +11,6 @@ private:
 	void Render() override;
 	void Cleanup() override;
 	void ReadInput() override;
+	int m_score;
 };
 

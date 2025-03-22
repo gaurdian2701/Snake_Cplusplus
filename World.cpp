@@ -14,6 +14,40 @@ void World::Update()
 	m_stateMachine->StateMachine_Update();
 }
 
+void World::UpdateScore()
+{
+	m_score += 10;
+}
+
+int World::GetScore()
+{
+	return m_score;
+}
+
+void World::CheckForCollisions()
+{
+	m_collisions.clear();
+	for (GameObject* gameObject : m_gameObjects)
+	{
+		Vector2D gameObjectPos = gameObject->GetPosition();
+		int collisionIndex = gameObjectPos.x * HORIZONTAL_RESOLUTION + gameObjectPos.y;
+
+		std::cout << gameObject->m_name << " Collision index: " << collisionIndex << std::endl;
+
+		std::map<int, CollisionStruct>::iterator it = m_collisions.find(collisionIndex);
+
+		if (it != m_collisions.end())
+		{
+			GameObject* gameObjectExistingInPosition = it->second.gameObject;
+			gameObject->OnCollision(gameObjectExistingInPosition);
+			gameObjectExistingInPosition->OnCollision(gameObject);
+		}
+
+		m_collisions[collisionIndex].frameID = 0;
+		m_collisions[collisionIndex].gameObject = gameObject;
+	}
+}
+
 void World::Render()
 {
 	BeginDrawing();

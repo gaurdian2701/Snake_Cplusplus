@@ -24,6 +24,7 @@ void PlayingState::Update()
 		if (!gameObject->IsDestroyed())
 			gameObject->Update();
 	}
+	ReadInput();
 }
 
 void PlayingState::Render() 
@@ -43,4 +44,6 @@ void PlayingState::Cleanup()
 	delete(m_apple);
 }
 
-void PlayingState::ReadInput() {}
+void PlayingState::ReadInput() 
+{
+}

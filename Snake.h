@@ -24,6 +24,7 @@ private:
 	int m_snakeSize = 1;
 	const float m_speedModifier = 200.0f;
 	void ReadInput();
+	void OnCollision(GameObject* other) override;
 
 public:
 	Snake(StateMachine* stateMachine, World *world, BaseAgent *playerAgent);
