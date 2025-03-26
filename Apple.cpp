@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Apple.h"
-#define APPLE_DIMENSIONS 15
+#define APPLE_DIMENSIONS 20
 
 Apple::Apple(World* world, GameObject* snake)
 {

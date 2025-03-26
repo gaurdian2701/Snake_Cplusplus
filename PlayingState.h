@@ -15,6 +15,7 @@ private:
 	void Cleanup() override;
 	void ReadInput() override;
 	GameObject* m_snake = nullptr;
+	GameObject* m_snakeAI = nullptr;
 	GameObject* m_apple = nullptr;
 	World* m_world = nullptr;
 	const std::vector<GameObject*>* m_gameObjects = nullptr;

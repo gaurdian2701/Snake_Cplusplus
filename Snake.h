@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "PlayerAgent.h"
+#include "AI_Agent.h"
 class Snake : public GameObject
 {
 private:

@@ -9,7 +9,7 @@ Snake::Snake(StateMachine* stateMachine, World *world, BaseAgent* playerAgent)
 	m_stateMachine = stateMachine;
 	m_playerAgent = playerAgent;
 	m_snakeSegments.reserve(100);
-	m_snakeSegments.push_back(Segment({ HORIZONTAL_RESOLUTION/ 2, VERTICAL_RESOLUTION / 2 }));
+	m_snakeSegments.push_back(Segment({ GetRandomValue(0, HORIZONTAL_RESOLUTION), GetRandomValue(0, VERTICAL_RESOLUTION)}));
 	m_headSegment = &m_snakeSegments[0];
 	m_movementVector = { 1, 0 };
 	world->AddGameObject(this);
